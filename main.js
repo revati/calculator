@@ -2,9 +2,14 @@
   var calculateValue = function(e) {
     e.preventDefault();
     var input = $("[name=\"equation\"]").val();
-    var value = eval( input );
 
-    $("#result").text( value );
+    try {
+      var value = eval( input );
+      $("#result").text( value );
+    }
+    catch(e) {
+      $("#result").text( "Error" );
+    }
   };
 
   // Add listener
