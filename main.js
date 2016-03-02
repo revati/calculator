@@ -1,6 +1,7 @@
 (function($) {
   var calculateValue = function(e) {
     e.preventDefault();
+    var oldValue = $("#result").text();
     var input = $("[name=\"equation\"]").val();
 
     try {
@@ -8,7 +9,7 @@
       $("#result").text( value );
     }
     catch(e) {
-      $("#result").text( "Error" );
+      $("#result").text( oldValue );
     }
   };
 
