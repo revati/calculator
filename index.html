@@ -1,25 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- Virsraksts -->
   <title>Kalkulators</title>
 
-  <style>
-  #result {
-    font-size: 28px;
-    text-align: center;
-  }
-  </style>
+  <!-- Izmanto twitter bootstrap -->
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+    integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+    crossorigin="anonymous">
+
+
 </head>
 <body>
 
-<form>
-  <input type="text" name="equation" placeholder="Provide equation"/>
-  <button type="submit">Calculate</button>
+<!-- Mājaslapas kaste  -->
+
+<form class="container">
+  <!-- Rinda -->
+  <div class="row">
+    <!-- Kalkulātora kaste - centrēta -->
+    <div class="col-ms-8 col-ms-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+      <!-- Rinda -->
+      <div class="row">
+        <div id="result" class="col-md-12">
+          Result
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">
+          <input type="button" value="AC" class="btn btn-primary"/>
+        </div>
+        <div class="col-xs-3">
+          <input type="button" value="+/-" class="btn btn-primary"/>
+        </div>
+        <div class="col-xs-3">
+          <input type="button" value="%" class="btn btn-primary"/>
+        </div>
+        <div class="col-xs-3">
+          <input type="button" value="/" class="btn btn-primary"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">
+          <input type="button" value="7" class="btn btn-default"/>
+        </div>
+        <div class="col-xs-3">
+          <input type="button" value="8" class="btn btn-default"/>
+        </div>
+        <div class="col-xs-3">
+          <input type="button" value="9" class="btn btn-default"/>
+        </div>
+        <div class="col-xs-3">
+          <input type="button" value="*" class="btn btn-primary"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">
+          <input type="button" value="4" class="btn btn-default"/>
+        </div>
+        <div class="col-xs-3">
+          <input type="button" value="5" class="btn btn-default"/>
+        </div>
+        <div class="col-xs-3">
+          <input type="button" value="6" class="btn btn-default"/>
+        </div>
+        <div class="col-xs-3">
+          <input type="button" value="-" class="btn btn-primary"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">
+          <input type="button" value="1" class="btn btn-default"/>
+        </div>
+        <div class="col-xs-3">
+          <input type="button" value="2" class="btn btn-default"/>
+        </div>
+        <div class="col-xs-3">
+          <input type="button" value="3" class="btn btn-default"/>
+        </div>
+        <div class="col-xs-3">
+          <input type="button" value="+" class="btn btn-primary"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <input type="button" value="0" class="btn btn-default"/>
+        </div>
+        <div class="col-xs-3">
+          <input type="button" value="." class="btn btn-default"/>
+        </div>
+        <div class="col-xs-3">
+          <input type="button" value="=" class="btn btn-primary"/>
+        </div>
+      </div>
+    </div>
+  </div>
 </form>
 
-<div id="result"></div>
-
-<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
 <script src="main.js"></script>
 
 </body>
