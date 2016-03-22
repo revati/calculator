@@ -3,6 +3,7 @@
   var pendingAction;
   var pendingNumber;
   var displayNumber;
+  var lastActionIsEquals = false;
 
   // Aprēķina jauno vērtību no diviem skaitļiem un darbības
   var calculate = function(num1, num2, action) {
@@ -25,7 +26,7 @@
   }
 
   // Atgriež jauno vērtību, ko rādīt displejā, balstoties uz
-  var newdisplayNumber = function(currentValue, change) {
+  var newDisplayNumber = function(currentValue, change) {
     // Tikai viens simbols katru reizi
     if(change.length > 1) {
       // Ja ir vairāki, tad ir haks, ignorēt šādu scenāriju
@@ -52,13 +53,23 @@
     }
 
     return currentValue + change;
+  };
+
+  var updateDisplayValue = function() {
+    // Ja jau ir otrs skaitlis un darbība, kas jāveic, tad veikt
+    if(pendingNumber && pendingAction) {
+      displayNumber = calculate(pendingNumber, displayNumber, pendingAction);
+
+      // Parādīt jauno vērtību
+      $("#result").text(displayNumber);
+    }
   }
 
   // Katru reizi, kad uzspiež kādu no cipariem
   $(".container").on("click", ".number", function(e) {
     e.preventDefault();
 
-    displayNumber = newdisplayNumber( displayNumber, $(this).val() );
+    displayNumber = newDisplayNumber( displayNumber, $(this).val() );
 
     $("#result").text(displayNumber);
   });
@@ -67,28 +78,39 @@
   $(".action").on("click", function(e) {
     e.preventDefault();
 
-    // Ja jau ir otrs skaitlis un darbība, kas jāveic, tad veikt
-    if(pendingNumber && pendingAction) {
-      displayNumber = calculate(pendingNumber, displayNumber, pendingAction);
+    if(!lastActionIsEquals) {
+      updateDisplayValue();
     }
 
-    // Ja action ir "="
-    if($(this).val() !== "=") {
-      // Saglabāt pendingAction tagad izvēlēto tēmu
-      pendingAction = $(this).val();
+    lastActionIsEquals = false;
 
-      // Saglabāt displayNumber kā pendingNumber
-      pendingNumber = displayNumber;
+    // Saglabāt pendingAction tagad izvēlēto tēmu
+    pendingAction = $(this).val();
 
-      // Nomainīt displayNumber uz tukšu
-      displayNumber = undefined;
+    // Saglabāt displayNumber kā pendingNumber
+    pendingNumber = displayNumber;
 
-      return;
+    // Nomainīt displayNumber uz tukšu
+    displayNumber = undefined;
+  });
+
+  // Katru reizi, kad uzspiež uz = pogas
+  $(".equals").on("click", function(e) {
+    e.preventDefault();
+
+    // Samainīt vietā displayNumber un pendingNumber vērtības.
+    // Jo visu laiku spiežot = pogu kalkulātoram jāturpina iepriekšējā darbība
+    // Mainīšana nepieciešama tikai pirmo reizi, kad uzspiež = pogu pēc kādas citas darbības pogas.
+    if(!lastActionIsEquals) {
+      lastActionIsEquals = true;
+
+      var currentNumber = displayNumber;
+
+      displayNumber = pendingNumber;
+      pendingNumber = currentNumber;
     }
 
-    // displayNumber = calculate(pendingNumber, displayNumber, pendingAction);
-
-    $("#result").text(displayNumber);
+    updateDisplayValue();
   });
 })(jQuery);
 
